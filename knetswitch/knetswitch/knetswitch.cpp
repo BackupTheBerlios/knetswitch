@@ -37,6 +37,11 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
   // place widgets here
   this->setMinimumHeight(400);
   profileWidget = new ProfileWidget(this);
+  IPValidator* val1 = new IPValidator(this);
+  profileWidget->le_hostip->setValidator(val1);
+  profileWidget->le_gateway->setValidator(val1);
+  profileWidget->le_netmask->setValidator(val1);
+  profileWidget->le_dnsip->setValidator(val1);
   QVBoxLayout* layout = new QVBoxLayout(this);
   layout->addWidget(profileWidget);
   load();

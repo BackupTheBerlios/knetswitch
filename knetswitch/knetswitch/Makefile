@@ -1,4 +1,5 @@
-# Generated automatically from Makefile.in by configure.
+# Generated automatically from Makefile.in by config.pl.
+# KDE tags expanded automatically by am_edit - $Revision: 1.3 $ 
 # Makefile.in generated automatically by automake 1.4 from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
@@ -18,8 +19,13 @@ SHELL = /bin/sh
 
 srcdir = .
 top_srcdir = ..
+VPATH = .
 prefix = /opt/kde2
 exec_prefix = ${prefix}
+#>- 
+bindir = ${exec_prefix}/bin
+#>+ 3
+DEPDIR = .deps
 
 bindir = ${exec_prefix}/bin
 sbindir = ${exec_prefix}/sbin
@@ -148,7 +154,7 @@ MICO_INCLUDES = @MICO_INCLUDES@
 MICO_LDFLAGS = @MICO_LDFLAGS@
 MOC = /usr/local/qt/bin/moc
 MSGFMT = /usr/bin/msgfmt
-NOOPT_CXXFLAGS =  -march=pentiumpro -fno-exceptions -fno-exceptions -fno-check-new
+NOOPT_CXXFLAGS =  -g3 -Wall -fno-exceptions -fno-check-new
 NOREPO = -fno-repo
 OBJDUMP = @OBJDUMP@
 OBJEXT = o
@@ -213,14 +219,16 @@ INCLUDES = $(all_includes)
 
 LDFLAGS = 
 
-libkcm_knetswitch_la_METASOURCES = AUTO
+#>- libkcm_knetswitch_la_METASOURCES = AUTO
 
-libkcm_knetswitch_la_SOURCES = profilewidget.cpp profiletab.ui knetswitch.cpp 
+#>- libkcm_knetswitch_la_SOURCES = ipvalidator.cpp profilewidget.cpp profiletab.ui knetswitch.cpp 
+#>+ 1
+libkcm_knetswitch_la_SOURCES=ipvalidator.cpp profilewidget.cpp  knetswitch.cpp  profiletab.cpp
 libkcm_knetswitch_la_LIBADD = -lXext -lX11 $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) 
 
 libkcm_knetswitch_la_LDFLAGS = -module $(KDE_PLUGIN)   
 
-EXTRA_DIST = knetswitch.cpp knetswitch.h profiletab.ui profilewidget.cpp profilewidget.h 
+EXTRA_DIST = knetswitch.cpp knetswitch.h profiletab.ui profilewidget.cpp profilewidget.h ipvalidator.cpp ipvalidator.h 
 mkinstalldirs = $(SHELL) $(top_srcdir)/admin/mkinstalldirs
 CONFIG_HEADER = ../config.h
 CONFIG_CLEAN_FILES = 
@@ -231,28 +239,60 @@ DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I..
 CPPFLAGS = 
 LIBS = 
 libkcm_knetswitch_la_DEPENDENCIES = 
-libkcm_knetswitch_la_OBJECTS =  profilewidget.lo knetswitch.lo
-CXXFLAGS = -O2 -O3 -march=pentiumpro -fno-exceptions -fno-exceptions -fno-check-new
-CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+#>- libkcm_knetswitch_la_OBJECTS =  ipvalidator.lo profilewidget.lo \
+#>- knetswitch.lo
+#>+ 6
+libkcm_knetswitch_la_final_OBJECTS = libkcm_knetswitch_la.all_cpp.lo 
+libkcm_knetswitch_la_nofinal_OBJECTS = ipvalidator.lo profilewidget.lo \
+knetswitch.lo profiletab.lo \
+libkcm_knetswitch_la_meta_unload.lo 
+libkcm_knetswitch_la_OBJECTS = $(libkcm_knetswitch_la_nofinal_OBJECTS)
+#libkcm_knetswitch_la_OBJECTS = $(libkcm_knetswitch_la_final_OBJECTS)
+CXXFLAGS = -O2 -O0 -g3 -Wall -fno-exceptions -fno-check-new
+#>- CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+#>+ 1
+CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) $(KDE_CXXFLAGS)
+#>- LTCXXCOMPILE = $(LIBTOOL) --mode=compile $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+#>+ 1
+LTCXXCOMPILE = $(LIBTOOL) --mode=compile --tag=CXX $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) $(KDE_CXXFLAGS)
 CXXLD = $(CXX)
-CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
+#>- CXXLINK = $(LIBTOOL) --mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
+#>+ 1
+CXXLINK = $(LIBTOOL) --mode=link --tag=CXX $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(KDE_CXXFLAGS) $(LDFLAGS) -o $@
 DIST_COMMON =  Makefile.am Makefile.in
 
 
-DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+#>- DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+#>+ 4
+KDE_DIST=knetswitch.kdevses knetswitch.kdevprj knetswitch.desktop libkcm_knetswitch_la_closure.cpp samplerc libkcm_knetswitch_la_meta_unload.cpp knetswitch.lsm profiletab.h 
+
+DISTFILES= $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
+
 
 TAR = tar
 GZIP_ENV = --best
-DEP_FILES =  .deps/knetswitch.P .deps/profilewidget.P
+#>- DEP_FILES =  .deps/ipvalidator.P .deps/knetswitch.P \
+#>- .deps/profilewidget.P
+#>+ 6
+#DEP_FILES =  $(DEPDIR)/profiletab.P $(DEPDIR)/libkcm_knetswitch_la_meta_unload.P  $(DEPDIR)/libkcm_knetswitch_la.all_cpp.P \
+	  .deps/ipvalidator.P .deps/knetswitch.P \
+.deps/profilewidget.P
+DEP_FILES =  $(DEPDIR)/profiletab.P $(DEPDIR)/libkcm_knetswitch_la_meta_unload.P   .deps/ipvalidator.P .deps/knetswitch.P \
+.deps/profilewidget.P
+
 SOURCES = $(libkcm_knetswitch_la_SOURCES)
 OBJECTS = $(libkcm_knetswitch_la_OBJECTS)
 
-all: all-redirect
+#>- all: all-redirect
+#>+ 1
+all: docs-am  all-redirect
 .SUFFIXES:
 .SUFFIXES: .S .c .cpp .lo .o .obj .s
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+#>- 	cd $(top_srcdir) && $(AUTOMAKE) --gnu knetswitch/Makefile
+#>+ 2
 	cd $(top_srcdir) && $(AUTOMAKE) --gnu knetswitch/Makefile
+	cd $(top_srcdir) && perl admin/am_edit knetswitch/Makefile.in
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)
 	cd $(top_builddir) \
@@ -322,7 +362,10 @@ distclean-libtool:
 
 maintainer-clean-libtool:
 
-libkcm_knetswitch.la: $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_DEPENDENCIES)
+#>- libkcm_knetswitch.la: $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_DEPENDENCIES)
+#>+ 2
+libkcm_knetswitch.la: libkcm_knetswitch.la.closure $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_DEPENDENCIES)
+#libkcm_knetswitch.la: $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_DEPENDENCIES)
 	$(CXXLINK) -rpath $(kde_moduledir) $(libkcm_knetswitch_la_LDFLAGS) $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_LIBADD) $(LIBS)
 .cpp.o:
 	$(CXXCOMPILE) -c $<
@@ -370,10 +413,21 @@ distdir: $(DISTFILES)
 	distdir=`cd $(distdir) && pwd`; \
 	cd $(top_srcdir) \
 	  && $(AUTOMAKE) --include-deps --build-dir=$$here --srcdir-name=$(top_srcdir) --output-dir=$$top_distdir --gnu knetswitch/Makefile
+#>- 	@for file in $(DISTFILES); do \
+#>- 	  d=$(srcdir); \
+#>- 	  if test -d $$d/$$file; then \
+#>- 	    cp -pr $$/$$file $(distdir)/$$file; \
+#>- 	  else \
+#>- 	    test -f $(distdir)/$$file \
+#>- 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+#>- 	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+#>- 	  fi; \
+#>- 	done
+#>+ 10
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
@@ -439,10 +493,14 @@ check-am: all-am
 check: check-am
 installcheck-am:
 installcheck: installcheck-am
-install-exec-am:
+#>- install-exec-am:
+#>+ 1
+install-exec-am: install-kde_moduleLTLIBRARIES
 install-exec: install-exec-am
 
-install-data-am: install-kde_moduleLTLIBRARIES
+#>- install-data-am: install-kde_moduleLTLIBRARIES
+#>+ 1
+install-data-am:  
 install-data: install-data-am
 
 install-am: all-am
@@ -473,10 +531,15 @@ mostlyclean-am:  mostlyclean-kde_moduleLTLIBRARIES mostlyclean-compile \
 
 mostlyclean: mostlyclean-am
 
-clean-am:  clean-kde_moduleLTLIBRARIES clean-compile clean-libtool \
+#>- clean-am:  clean-kde_moduleLTLIBRARIES clean-compile clean-libtool \
+#>- 		clean-tags clean-depend clean-generic mostlyclean-am
+#>+ 2
+clean-am: clean-metasources clean-ui clean-closures clean-moc-classes clean-final   clean-kde_moduleLTLIBRARIES clean-compile clean-libtool \
 		clean-tags clean-depend clean-generic mostlyclean-am
 
-clean: clean-am
+#>- clean: clean-am
+#>+ 1
+clean: kde-rpo-clean  clean-am
 
 distclean-am:  distclean-kde_moduleLTLIBRARIES distclean-compile \
 		distclean-libtool distclean-tags distclean-depend \
@@ -517,3 +580,106 @@ messages:
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
+
+#>+ 8
+libkcm_knetswitch.la.closure: $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_DEPENDENCIES)
+	@echo "int main() {return 0;}" > libkcm_knetswitch_la_closure.cpp
+	@$(LTCXXCOMPILE) -c libkcm_knetswitch_la_closure.cpp
+	@$(CXXLINK) libkcm_knetswitch_la_closure.lo $(libkcm_knetswitch_la_LDFLAGS) $(libkcm_knetswitch_la_OBJECTS) $(libkcm_knetswitch_la_LIBADD) $(LIBS)
+	@rm -f libkcm_knetswitch_la_closure.* libkcm_knetswitch.la.closure
+	@echo "timestamp" > libkcm_knetswitch.la.closure
+
+
+#>+ 3
+profiletab.moc: $(srcdir)/profiletab.h
+	$(MOC) $(srcdir)/profiletab.h -o profiletab.moc
+
+#>+ 3
+knetswitch.moc: $(srcdir)/knetswitch.h
+	$(MOC) $(srcdir)/knetswitch.h -o knetswitch.moc
+
+#>+ 12
+profiletab.cpp: $(srcdir)/profiletab.ui profiletab.h profiletab.moc
+	rm -f profiletab.cpp
+	echo '#include <klocale.h>' > profiletab.cpp
+	$(UIC) -tr i18n -i profiletab.h $(srcdir)/profiletab.ui | sed -e "s,i18n( \"\" ),QString::null,g" >> profiletab.cpp || rm -f profiletab.cpp
+	echo '#include "profiletab.moc"' >> profiletab.cpp
+
+profiletab.h: $(srcdir)/profiletab.ui
+	$(UIC) -o profiletab.h $(srcdir)/profiletab.ui
+
+profiletab.moc: profiletab.h
+	$(MOC) profiletab.h -o profiletab.moc
+
+#>+ 3
+clean-metasources:
+	-rm -f  profiletab.moc knetswitch.moc
+
+#>+ 4
+clean-ui:
+	-rm -f \
+	profiletab.cpp profiletab.h profiletab.moc 
+
+#>+ 3
+clean-closures:
+	-rm -f  libkcm_knetswitch.la.closure
+
+#>+ 2
+docs-am:
+
+#>+ 5
+force-reedit:
+		cd $(top_srcdir) && $(AUTOMAKE) --gnu knetswitch/Makefile
+	cd $(top_srcdir) && perl admin/am_edit knetswitch/Makefile.in
+
+
+#>+ 10
+libkcm_knetswitch_la_meta_unload.cpp:  profiletab.moc knetswitch.moc
+	@echo 'creating libkcm_knetswitch_la_meta_unload.cpp'
+	@-rm -f libkcm_knetswitch_la_meta_unload.cpp
+	@echo 'static const char * _metalist_libkcm_knetswitch_la[] = {' > libkcm_knetswitch_la_meta_unload.cpp
+	@cat  profiletab.moc knetswitch.moc | grep 'char.*className' | sed -e 's/.*[^A-Za-z0-9_:]\([A-Za-z0-9_:]*\)::className.*$$/\"\1\",/' | sort | uniq >> libkcm_knetswitch_la_meta_unload.cpp
+	@echo '0};' >> libkcm_knetswitch_la_meta_unload.cpp
+	@echo '#include <kunload.h>' >> libkcm_knetswitch_la_meta_unload.cpp
+	@echo '_UNLOAD(libkcm_knetswitch_la)' >> libkcm_knetswitch_la_meta_unload.cpp
+
+
+#>+ 3
+clean-moc-classes:
+	-rm -f  libkcm_knetswitch_la_meta_unload.cpp
+
+#>+ 11
+libkcm_knetswitch_la.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/ipvalidator.cpp $(srcdir)/profilewidget.cpp $(srcdir)/knetswitch.cpp $(srcdir)/profiletab.cpp $(srcdir)/libkcm_knetswitch_la_meta_unload.cpp   profiletab.moc knetswitch.moc  profiletab.moc
+	@echo 'creating libkcm_knetswitch_la.all_cpp.cpp ...'; \
+	rm -f libkcm_knetswitch_la.all_cpp.files libkcm_knetswitch_la.all_cpp.final; \
+	echo "#define KDE_USE_FINAL 1" >> libkcm_knetswitch_la.all_cpp.final; \
+	for file in ipvalidator.cpp profilewidget.cpp knetswitch.cpp profiletab.cpp libkcm_knetswitch_la_meta_unload.cpp ; do \
+	  echo "#include \"$$file\"" >> libkcm_knetswitch_la.all_cpp.files; \
+	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libkcm_knetswitch_la.all_cpp.final; \
+	done; \
+	cat libkcm_knetswitch_la.all_cpp.final libkcm_knetswitch_la.all_cpp.files  > libkcm_knetswitch_la.all_cpp.cpp; \
+	rm -f libkcm_knetswitch_la.all_cpp.final libkcm_knetswitch_la.all_cpp.files
+
+#>+ 3
+clean-final:
+	-rm -f libkcm_knetswitch_la.all_cpp.cpp
+
+#>+ 2
+final:
+	$(MAKE) libkcm_knetswitch_la_OBJECTS="$(libkcm_knetswitch_la_final_OBJECTS)" all-am
+#>+ 2
+no-final:
+	$(MAKE) libkcm_knetswitch_la_OBJECTS="$(libkcm_knetswitch_la_nofinal_OBJECTS)" all-am
+#>+ 3
+cvs-clean:
+	$(MAKE) -f $(top_srcdir)/admin/Makefile.common cvs-clean
+
+#>+ 3
+kde-rpo-clean:
+	-rm -f *.rpo
+
+#>+ 5
+$(srcdir)/knetswitch.cpp: knetswitch.moc profiletab.h 
+$(srcdir)/profilewidget.cpp: profiletab.h 
+$(srcdir)/ipvalidator.cpp: profiletab.h 
+$(srcdir)/profiletab.cpp: profiletab.moc 

@@ -20,6 +20,7 @@
 #include <kcmodule.h>
 #include <kaboutdata.h>
 #include <profilewidget.h>
+#include <ipvalidator.h>
 
 // qt xml includes
 #include <qdom.h>
