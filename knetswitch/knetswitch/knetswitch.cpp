@@ -29,7 +29,12 @@
 #include <qtextstream.h>
 #include <qgroupbox.h>
 
+// module stuff
+#include "netswitchmodule.h"
 #include "msocks.h"
+#include "mbasicnetworking.h"
+
+#include "modulelistboxitem.h"
 
 #include <ktempfile.h>
 #include <klineeditdlg.h>
@@ -40,14 +45,22 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
   // place widgets here
   this->setMinimumHeight(400);
   profileWidget = new ProfileWidget(this);
-  IPValidator* val1 = new IPValidator(this);
-/*  profileWidget->le_hostip->setValidator(val1);
-  profileWidget->le_gateway->setValidator(val1);
-  profileWidget->le_netmask->setValidator(val1);
-  profileWidget->le_dnsip->setValidator(val1);
-*/
-/*  QVBoxLayout* layout = new QVBoxLayout(this);
-  layout->add(profileWidget);*/
+
+  NetswitchModule* m = new MSocks(profileWidget->GroupBox2);
+  cout << "Adding Module " << m->getIdentifier() << endl;
+  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/opt/kde2/share/icons/hicolor/64x64/mimetypes/video.png"),m->getName(), m->getIdentifier()));
+  modules.insert(m->getIdentifier(), m);
+
+  m = new MBasicNetworking(profileWidget->GroupBox2);
+  activeModule = m;
+
+  cout << "Adding Module " << m->getIdentifier() << endl;
+  m->getWidget()->hide();
+  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/opt/kde2/share/icons/hicolor/64x64/mimetypes/video.png"),m->getName(), m->getIdentifier()));
+  modules.insert(m->getIdentifier(), m);
+
+
+
 
   load();
 
@@ -62,7 +75,7 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
   connect(profileWidget->pb_saveCurrentProfile, SIGNAL(clicked()), this, SLOT(saveProfileClicked()));
   connect(profileWidget->pb_resetCurrentProfile, SIGNAL(clicked()), this, SLOT(resetProfileClicked()));
   connect(profileWidget->pb_newProfile, SIGNAL(clicked()), this, SLOT(newProfileClicked()));
-  connect(profileWidget->list_modules, SIGNAL(selectionChanged()), this, SLOT(switchModule()));
+  connect(profileWidget->list_modules, SIGNAL(selectionChanged( QListBoxItem * )), this, SLOT(switchModule( QListBoxItem *  )));
 
 /*  cout << "init done " << endl;
   if (getuid() != 0) {
@@ -299,19 +312,12 @@ void KNetSwitch::load() {
 }
 
 
-void KNetSwitch::switchModule() {
+void KNetSwitch::switchModule(QListBoxItem* item) {
   cout << "adding new widget" << cout << profileWidget->list_modules->currentText() << endl;
 
-  if ("socks" == profileWidget->list_modules->currentText()) {
-
-    MSocks* test = new MSocks(profileWidget->GroupBox2);
-    test->getWidget()->show();
-  } else {
-    Widget_BasicNetworking* test = new Widget_BasicNetworking(profileWidget->GroupBox2);
-    test->show();
-  }
-
-//  _layout->add(test->getWidget());
+  activeModule->getWidget()->hide();
+  cout << "Identifier: " << dynamic_cast <ModuleListBoxItem*>(item)->getIdentifier();
+  modules[dynamic_cast <ModuleListBoxItem*>(item)->getIdentifier()]->getWidget()->show();
 }
 
 void KNetSwitch::defaults() {

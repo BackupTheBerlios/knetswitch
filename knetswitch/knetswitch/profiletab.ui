@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>600</width>
+            <width>596</width>
             <height>469</height>
         </rect>
     </property>
@@ -429,24 +429,6 @@
             </widget>
             <widget>
                 <class>QListBox</class>
-                <item>
-                    <property>
-                        <name>text</name>
-                        <string>basic</string>
-                    </property>
-                </item>
-                <item>
-                    <property>
-                        <name>text</name>
-                        <string>ssh</string>
-                    </property>
-                </item>
-                <item>
-                    <property>
-                        <name>text</name>
-                        <string>socks</string>
-                    </property>
-                </item>
                 <property stdset="1">
                     <name>name</name>
                     <cstring>list_modules</cstring>

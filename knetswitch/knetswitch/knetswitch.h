@@ -21,13 +21,14 @@
 #include <kaboutdata.h>
 #include <profilewidget.h>
 #include <ipvalidator.h>
-#include <qlayout.h>
-#include <msocks.h>
-#include <basicnetworking.h>
+#include <netswitchmodule.h>
 
 // qt xml includes
 #include <qdom.h>
+
 #include <qfile.h>
+#include <qlistbox.h>
+#include <qdict.h>
 
 #include <kprocess.h>
 
@@ -54,7 +55,7 @@ class KNetSwitch: public KCModule
       void newProfileClicked();
       void textChanged(const QString& text);
       void processFinished(KProcess *);
-      void switchModule();
+      void switchModule(QListBoxItem *);
    private:
       KAboutData *myAboutData;
       ProfileWidget* profileWidget;
@@ -64,7 +65,8 @@ class KNetSwitch: public KCModule
       QString curProfileName;
       QString rcfile;
       QVBoxLayout*  _layout;
-      MSocks* test;
+      QDict<NetswitchModule> modules;
+      NetswitchModule* activeModule;
 };
 
 #endif
