@@ -20,6 +20,7 @@
 
 #include <netswitchmodule.h>
 #include <dantesocks.h>
+#include <socksroute.h>
 
 /**KNetswitch Module implementing socks configuration.
   *@author Oliver Strutynski
@@ -59,8 +60,15 @@ public:
   */
   virtual bool MSocks::run();
 
+public slots:
+
+  void createNewRoute();
+
 private:
   widget_dantesocks* widget;
+  QDomElement* root;
+  QDict<SocksRoute> routes;
+  bool currentProfileChanged;
 };
 
 #endif

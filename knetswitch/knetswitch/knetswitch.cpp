@@ -47,9 +47,6 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
   this->setMinimumHeight(400);
   profileWidget = new ProfileWidget(this);
 
-  profileWidget->combo_profileNames2->insertItem(rcfile);
-
-
   NetswitchModule* m = new MSocks(profileWidget->GroupBox2);
   cout << "Adding Module " << m->getIdentifier() << endl;
   profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch/lock.png"),m->getName(), m->getIdentifier()));
@@ -106,7 +103,6 @@ void KNetSwitch::newProfileClicked() {
   QDomElement e = dataStore->createElement("knetswitchprofile");
   e.setAttribute("name", dlg.text());
   root.appendChild(e);
-  // TODO: iterate over modules and call init(e)
 
   QDictIterator<NetswitchModule> it( modules );
   while ( it.current() ) {

@@ -102,7 +102,7 @@ install_location=
 type=DATA
 
 [knetswitch/Makefile.am]
-files=knetswitch/knetswitch.cpp,knetswitch/knetswitch.h,knetswitch/profiletab.ui,knetswitch/profilewidget.cpp,knetswitch/profilewidget.h,knetswitch/ipvalidator.cpp,knetswitch/ipvalidator.h,knetswitch/netswitchmodule.cpp,knetswitch/netswitchmodule.h,knetswitch/msocks.cpp,knetswitch/msocks.h,knetswitch/mbasicnetworking.cpp,knetswitch/mbasicnetworking.h,knetswitch/modulelistboxitem.cpp,knetswitch/modulelistboxitem.h,knetswitch/basicnetworking.ui
+files=knetswitch/knetswitch.cpp,knetswitch/knetswitch.h,knetswitch/profiletab.ui,knetswitch/profilewidget.cpp,knetswitch/profilewidget.h,knetswitch/ipvalidator.cpp,knetswitch/ipvalidator.h,knetswitch/netswitchmodule.cpp,knetswitch/netswitchmodule.h,knetswitch/msocks.cpp,knetswitch/msocks.h,knetswitch/mbasicnetworking.cpp,knetswitch/mbasicnetworking.h,knetswitch/modulelistboxitem.cpp,knetswitch/modulelistboxitem.h,knetswitch/basicnetworking.ui,knetswitch/socksroute.cpp,knetswitch/socksroute.h
 sub_dirs=widgets
 type=shared_library
 
@@ -197,6 +197,18 @@ install_location=
 type=SOURCE
 
 [knetswitch/profilewidget.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
+[knetswitch/socksroute.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[knetswitch/socksroute.h]
 dist=true
 install=false
 install_location=

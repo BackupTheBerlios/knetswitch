@@ -43,7 +43,7 @@
         <class>QComboBox</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>ComboBox1</cstring>
+            <cstring>combo_Routes</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>

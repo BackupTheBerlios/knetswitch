@@ -1,9 +1,13 @@
 KNetSwitch 0.1
 ==============
 
-0.1) Purpose of the Program
+0.1) Purpose of this Program
 0.2) Prerequisites
 
+
+0.1 Purpose of this Program
+===========================
+See http://knetswitch.berlios.de
 
 0.2 Prerequisites
 =================
@@ -13,5 +17,14 @@ The following utilities must be present in /sbin:
 
 Any distribution complying to the Filesystem Hierarchy Standard (FHS)
 version 2.2 should have these utilities in the above location.
+
+You will also need KDE 2.2.x (other 2.x versions should work as well).
+KDE is available from http://www.kde.org
+
+0.3 Installation
+===============
+./configure
+make
+make install (as root)
 
 

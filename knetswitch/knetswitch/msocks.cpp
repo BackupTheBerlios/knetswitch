@@ -17,9 +17,15 @@
 
 #include "msocks.h"
 
+#include <iostream.h>
+#include <klineeditdlg.h>
+#include <qcombobox.h>
+
+
 MSocks::MSocks(QWidget* parent) : NetswitchModule(parent) {
   widget = new widget_dantesocks(parent);
 }
+
 MSocks::~MSocks() {
 }
 
@@ -36,11 +42,50 @@ QWidget* MSocks::getWidget() {
   return widget;
 }
 
-void MSocks::init(QDomElement config) {}
+void MSocks::init(QDomElement config) {
+  reset(config);
+}
 
-QDomElement MSocks::save() { QDomElement x; return x; }
+void MSocks::createNewRoute() {
+  KLineEditDlg dlg("Socks Route Name", "", widget);
+  dlg.show();
+  if (!dlg.text().stripWhiteSpace().isEmpty()) {
+     widget->combo_Routes->insertItem(dlg.text(), 0);
+  }
 
-void MSocks::reset(QDomElement config) {}
+  SocksRoute* route = new SocksRoute(dlg.text());
+  routes.insert(dlg.text(),route);
+}
+
+QDomElement MSocks::save() {
+
+return *root;
+
+}
+
+void MSocks::reset(QDomElement config) {
+
+  cout << "Resetting Socks Module: Loading configuration." << endl;
+
+  currentProfileChanged = false;
+
+  routes.setAutoDelete(true);
+  routes.clear();
+
+  root = new QDomElement(config);
+
+  // get tcp/ip information
+/*  hostip = config.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().value();
+  netmask = config.namedItem("ipconfig").attributes().namedItem("netmask").toAttr().value();
+  gateway = config.namedItem("ipconfig").attributes().namedItem("gateway").toAttr().value();
+  dnsip = config.namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().value();*/
+  // get device name
+//  device = config.namedItem("device").attributes().namedItem("devicename").toAttr().value();
+
+
+
+
+}
 
 bool MSocks::run() {}
 
