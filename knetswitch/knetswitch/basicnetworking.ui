@@ -1,0 +1,203 @@
+<!DOCTYPE UI><UI>
+<class>Widget_BasicNetworking</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>Form1</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>427</width>
+            <height>219</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Form1</string>
+    </property>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_gateway</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>125</y>
+                <width>261</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_hostip</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>35</y>
+                <width>261</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel1_3_2_3</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>155</y>
+                <width>111</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Device</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel1_3_2_2</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>65</y>
+                <width>111</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Netmask</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel1_3</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>35</y>
+                <width>111</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>IP-Adress</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel1_3_2_2_2</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>95</y>
+                <width>111</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Name-Server</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel1_3_2</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>20</x>
+                <y>125</y>
+                <width>111</width>
+                <height>21</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Default-Gateway</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_dnsip</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>95</y>
+                <width>261</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_netmask</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>65</y>
+                <width>261</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_deviceName</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>150</x>
+                <y>155</y>
+                <width>261</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+</widget>
+</UI>
