@@ -14,4 +14,4 @@ X-KDE-FactoryName=knetswitch
 X-KDE-Library=knetswitch
 X-KDE-ModuleType=Library
 X-KDE-RootOnly=true
-X-KDE-HasReadOnlyMode=true
+X-KDE-HasReadOnlyMode=false

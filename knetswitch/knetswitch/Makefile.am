@@ -9,14 +9,14 @@ LDFLAGS =
 
 libkcm_knetswitch_la_METASOURCES=AUTO
 
-libkcm_knetswitch_la_SOURCES = modulelistboxitem.cpp basicnetworking.ui netswitchmodule.cpp mbasicnetworking.cpp msocks.cpp ipvalidator.cpp profilewidget.cpp profiletab.ui dantesocks.ui knetswitch.cpp 
+libkcm_knetswitch_la_SOURCES = knetswitch.cpp modulelistboxitem.cpp basicnetworking.ui netswitchmodule.cpp mbasicnetworking.cpp msocks.cpp ipvalidator.cpp profilewidget.cpp profiletab.ui dantesocks.ui
 libkcm_knetswitch_la_LIBADD = $(X_LDFLAGS) $(KDE_LDFLAGS) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
 
 libkcm_knetswitch_la_LDFLAGS = -module $(KDE_PLUGIN)  
 
 
 
-EXTRA_DIST = knetswitch.cpp knetswitch.h profiletab.ui profilewidget.cpp profilewidget.h knetswitch.desktop ipvalidator.cpp ipvalidator.h profiletab.h 
+# EXTRA_DIST = knetswitch.cpp knetswitch.h profiletab.ui profilewidget.cpp profilewidget.h knetswitch.desktop ipvalidator.cpp ipvalidator.h profiletab.h 
 
 install-data-local:
 	$(mkinstalldirs) $(kde_appsdir)/Settings/Network/

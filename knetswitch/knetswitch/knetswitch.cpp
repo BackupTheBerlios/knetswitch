@@ -26,7 +26,6 @@
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
-#include <qtextstream.h>
 #include <qgroupbox.h>
 
 // module stuff
@@ -36,7 +35,6 @@
 
 #include "modulelistboxitem.h"
 
-#include <ktempfile.h>
 #include <klineeditdlg.h>
 
 KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
@@ -48,7 +46,7 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
 
   NetswitchModule* m = new MSocks(profileWidget->GroupBox2);
   cout << "Adding Module " << m->getIdentifier() << endl;
-  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/opt/kde2/share/icons/hicolor/64x64/mimetypes/video.png"),m->getName(), m->getIdentifier()));
+  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch/lock.png"),m->getName(), m->getIdentifier()));
   modules.insert(m->getIdentifier(), m);
 
   m = new MBasicNetworking(profileWidget->GroupBox2);
@@ -56,13 +54,12 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
 
   cout << "Adding Module " << m->getIdentifier() << endl;
   m->getWidget()->hide();
-  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch/lock.png"),m->getName(), m->getIdentifier()));
+  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/opt/kde2/share/icons/hicolor/32x32/actions/connect_established.png"),m->getName(), m->getIdentifier()));
   modules.insert(m->getIdentifier(), m);
 
   load();
 
   currentProfileChanged = false;
-  connect(profileWidget->combo_profileNames1, SIGNAL(activated(const QString&)), this, SLOT(profileViewActivated(const QString&)));
   connect(profileWidget->combo_profileNames2, SIGNAL(activated(const QString&)), this, SLOT(profileEditActivated(const QString&)));
   connect(profileWidget->pb_saveCurrentProfile, SIGNAL(clicked()), this, SLOT(saveProfileClicked()));
   connect(profileWidget->pb_resetCurrentProfile, SIGNAL(clicked()), this, SLOT(resetProfileClicked()));
@@ -82,9 +79,9 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
 
 }
 
-void KNetSwitch::processFinished(KProcess* dummy) {
+/*void KNetSwitch::processFinished(KProcess* dummy) {
   profileWidget->lbl_ip->setText("done");
-}
+} */
 
 void KNetSwitch::textChanged(const QString& text) {
   currentProfileChanged = true;
@@ -105,7 +102,19 @@ void KNetSwitch::newProfileClicked() {
   root.appendChild(e);
   // TODO: iterate over modules and call init(e)
 
-  profileWidget->combo_profileNames1->insertItem(dlg.text(), 0);
+  QDictIterator<NetswitchModule> it( modules );
+  while ( it.current() ) {
+      cout << "Adding new profile for module: " <<  it.current()->getIdentifier() << endl;
+
+      QDomElement e2 = dataStore->createElement("modulesettings");
+      e2.setAttribute("modulename", it.current()->getIdentifier());
+      e.appendChild(e2);
+      it.current()->init(e2);
+      ++it;
+  }
+
+  cout << dataStore->toString();
+
   profileEditActivated(dlg.text());
 }
 
@@ -169,39 +178,6 @@ void KNetSwitch::saveProfileClicked() {
 //  }
 }
 
-void KNetSwitch::profileViewActivated(const QString& profileName) {
-
-  cout << "new profile selected: " << profileName << endl;
-  curProfileName = profileName;
-
-  // print out the element names of all elements that are a direct child
-  // of the outermost element.
-  QDomElement docElem = dataStore->documentElement();
-  QDomNodeList profiles = dataStore->elementsByTagName("knetswitchprofile");
-  // iterate over profiles in config file
-  for (unsigned int i = 0; i < profiles.count(); i++) {
-      cout << "Profile " << i << endl;
-      QDomNode curProf = profiles.item(i);
-
-      // get profile name
-      QDomNamedNodeMap map = curProf.attributes();
-      // will most certainly crash if there is no attribute "name" inside
-      // the knetswitchprofile tag
-      QDomNode name = map.namedItem("name");
-
-      if (name.toAttr().value() != profileName) {
-        cout << name.toAttr().value() << " => will continue " << endl;
-        continue;
-      }
-
-      // TODO: Iterate over modules calling init()
-  }
-
-
-
-}
-
-
 void KNetSwitch::profileEditActivated(const QString& profileName) {
   profileWidget->combo_profileNames2->setEditable(false);
 
@@ -229,13 +205,20 @@ void KNetSwitch::profileEditActivated(const QString& profileName) {
         cout << name.toAttr().value() << " => will continue " << endl;
         continue;
       }
-      // get device name
-      QString deviceName = curProf.namedItem("device").attributes().namedItem("devicename").toAttr().value();
-      // get tcp/ip information
-      QString hostip = curProf.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().value();
-      QString netmask = curProf.namedItem("ipconfig").attributes().namedItem("netmask").toAttr().value();
-      QString gateway = curProf.namedItem("ipconfig").attributes().namedItem("gateway").toAttr().value();
-      QString dnsip = curProf.namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().value();
+
+      QDomNode m = curProf.firstChild();
+      while( !m.isNull() ) {
+          if ( m.isElement() ) {
+              QDomElement e = m.toElement();
+              map = e.attributes();
+              cout << "Module: " << map.namedItem("modulename").toAttr().value() << endl;
+              if (modules[map.namedItem("modulename").toAttr().value()]) {
+                  modules[map.namedItem("modulename").toAttr().value()]->init(e);
+              }
+          }
+          m = m.nextSibling();
+      }
+
 
   }
 }
@@ -270,35 +253,22 @@ void KNetSwitch::load() {
   root = dataStore->documentElement();
   QDomNodeList profiles = dataStore->elementsByTagName("knetswitchprofile");
   // iterate over profiles in config file
+  cout << "Number of profiles in config file: " << profiles.count() << endl;
   for (unsigned int i = 0; i < profiles.count(); i++) {
-      cout << "Profile " << i << endl;
+      cout << ">>Profile " << i << endl;
       QDomNode curProf = profiles.item(i);
 
       // get profile name
       QDomNamedNodeMap map = curProf.attributes();
       // will most certainly crash if there is no attribute "name" inside
       // the knetswitchprofile tag
-      profileWidget->combo_profileNames1->insertItem(map.namedItem("name").toAttr().value());
       profileWidget->combo_profileNames2->insertItem(map.namedItem("name").toAttr().value());
 
       // make the first profile the active one
       if (i == 0) {
-          profileViewActivated(map.namedItem("name").toAttr().value());
+          profileEditActivated(map.namedItem("name").toAttr().value());
       }
 
-      QDomNode m = curProf.firstChild();
-      while ( !m.isNull() ) {
-          if ( m.isElement() ) {
-              QDomElement e = m.toElement();
-              map = e.attributes();
-              cout << "Module: " << map.namedItem("modulename").toAttr().value() << endl;
-              if (modules[map.namedItem("modulename").toAttr().value()]) {
-                  modules[map.namedItem("modulename").toAttr().value()]->init(e);
-              }
-              return;
-          }
-          m = curProf.nextSibling();
-      }
 
   }
 }
@@ -322,41 +292,14 @@ void KNetSwitch::save() {
   // "edit profiles" tab.
   // selecting apply or ok will only change the network configuration
 
-  QString commandLine;
-  commandLine = QString("ifconfig ") + QString("eth0 ") + profileWidget->lbl_ip->text() + QString(" netmask ") + profileWidget->lbl_netmask->text();
-  cout << commandLine << endl;
-
-  KTempFile script(QString::null, QString::null, 0700 );
-  if (script.status()) {
-      cout << "Error: Could not create temporary script file." << endl;
-      return;
+  // iterate over modules
+  QDictIterator<NetswitchModule> it( modules );
+  while ( it.current() ) {
+      cout << "Applying data for module: " <<  it.current()->getIdentifier() << endl;
+      if (it.current()->run()) { cout << "ok" << endl; }
+      ++it;
   }
 
-  script.setAutoDelete(true);
-  QTextStream outfile(script.file());
-  outfile <<  QString("/sbin/route del default;") << endl;
-  //outfile << QString("/sbin/route add default gw ") << profileWidget->lbl_gateway->text() << ">> /tmp/test.log;" << endl;
-  outfile << QString("/sbin/route add default gw ") << profileWidget->lbl_gateway->text() << ">> /tmp/test.log;" << endl;
-  outfile << QString("/sbin/ifconfig ") << profileWidget->lbl_deviceName->text() << " " << profileWidget->lbl_ip->text() << " netmask " << profileWidget->lbl_netmask->text() << ";" << endl;
-  script.close();
-
-  KProcess proc;
-  proc << script.name();
-
-  connect(&proc, SIGNAL(processExited(KProcess *)), this, SLOT(processFinished(KProcess *)));
-  proc.start( KProcess::Block );
-
-  // write dns server to /etc/resolv.conf
-  QFile* resolvfile = new QFile("/etc/resolv.conf");
-  resolvfile->open(IO_WriteOnly);
-  QTextStream outStream(resolvfile);
-  outStream << "search local" << endl;
-  outStream << "nameserver " << profileWidget->lbl_dns->text() << endl;
-  resolvfile->close();
-
-  currentProfileChanged = false;
-
-  // TODO: Insert sanity and security checks!!! ifconfig needs to be run as root.
 
   emit changed(true);
 }

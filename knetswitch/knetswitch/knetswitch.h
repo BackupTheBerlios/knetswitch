@@ -30,7 +30,6 @@
 #include <qlistbox.h>
 #include <qdict.h>
 
-#include <kprocess.h>
 
 class KNetSwitch: public KCModule
 {
@@ -48,13 +47,11 @@ class KNetSwitch: public KCModule
 
    public slots:
       void configChanged();
-      void profileViewActivated(const QString& profileName);
       void profileEditActivated(const QString& profileName);
       void resetProfileClicked();
       void saveProfileClicked();
       void newProfileClicked();
       void textChanged(const QString& text);
-      void processFinished(KProcess *);
       void switchModule();
    private:
       KAboutData *myAboutData;

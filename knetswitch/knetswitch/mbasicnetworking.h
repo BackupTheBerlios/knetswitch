@@ -20,13 +20,19 @@
 
 #include <netswitchmodule.h>
 #include <basicnetworking.h>
+#include <ktempfile.h>
+#include <qtextstream.h>
+#include <kprocess.h>
+#include <qstring.h>
 
 /**
   *@author Oliver Strutynski
   */
 
-class MBasicNetworking : public NetswitchModule  {
-public: 
+class MBasicNetworking : public NetswitchModule
+{
+   Q_OBJECT
+public:
 	MBasicNetworking(QWidget* parent);
 	virtual ~MBasicNetworking();
 
@@ -59,10 +65,14 @@ public:
   */
   virtual bool run();
 
+public slots:
+  void textChanged(const QString&);
+
 private:
   Widget_BasicNetworking* widget;
   QString hostip, netmask, gateway, dnsip, device;
   QDomElement* root;
+  bool currentProfileChanged;
 };
 
 #endif

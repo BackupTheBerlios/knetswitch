@@ -30,6 +30,7 @@ MBasicNetworking::MBasicNetworking(QWidget* parent) : NetswitchModule(parent) {
   widget->le_dnsip->setValidator(val1);
 
 }
+
 MBasicNetworking::~MBasicNetworking() {
 }
 
@@ -41,7 +42,6 @@ QString MBasicNetworking::getName() {
   return "Basic Networking";
 }
 
-
 QWidget* MBasicNetworking::getWidget() {
   return widget;
 }
@@ -51,27 +51,62 @@ void MBasicNetworking::init(QDomElement config) {
     reset(config);
 }
 
+void MBasicNetworking::textChanged(const QString&) {
+}
+
+
 QDomElement MBasicNetworking::save() {
   // just write the content of our widgets to dom tree
 
-  cout << "setting dom elements" << endl;
-  root->namedItem("ipconfig").attributes().namedItem("hostip").toAttr().setValue(widget->le_hostip->text());
-  root->namedItem("ipconfig").attributes().namedItem("netmask").toAttr().setValue(widget->le_netmask->text());
-  root->namedItem("ipconfig").attributes().namedItem("gateway").toAttr().setValue(widget->le_gateway->text());
-  root->namedItem("device").attributes().namedItem("devicename").toAttr().setValue(widget->le_deviceName->text());
-  root->namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().setValue(widget->le_dnsip->text());
+  currentProfileChanged = true;
+  cout << "Profile changed ... " << endl;
+  hostip = widget->le_hostip->text();
+  netmask = widget->le_netmask->text();
+  gateway = widget->le_gateway->text();
+  dnsip = widget->le_dnsip->text();
+  device = widget->le_deviceName->text();
 
+  if (currentProfileChanged) {
+      cout << "setting dom elements" << endl;
+      root->namedItem("ipconfig").attributes().namedItem("hostip").toAttr().setValue(hostip);
+      root->namedItem("ipconfig").attributes().namedItem("netmask").toAttr().setValue(netmask);
+      root->namedItem("ipconfig").attributes().namedItem("gateway").toAttr().setValue(gateway);
+      root->namedItem("device").attributes().namedItem("devicename").toAttr().setValue(device);
+      root->namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().setValue(dnsip);
+  }
   return *root;
 }
 
 void MBasicNetworking::reset(QDomElement config) {
   cout << "Resetting Basic Networking Module: Loading configuration." << endl;
+  currentProfileChanged = false;
 
-  cout << ">>" << config.text();
-  root = new QDomElement(config);
   // if any of the following nodes/attributes does not exist, create them so
   // that we have a complete dom tree when we save the current items
   // later on.
+  QDomElement e, e2;
+  if (config.namedItem("ipconfig").isNull()) {
+      e = config.ownerDocument().createElement("ipconfig");
+      e.setAttribute("hostip", "");
+      e.setAttribute("netmask", "");
+      e.setAttribute("gateway", "");
+      config.appendChild(e);
+  }
+  if (config.namedItem("device").isNull()) {
+      e = config.ownerDocument().createElement("device");
+      e.setAttribute("devicename", "");
+      config.appendChild(e);
+  }
+  if (config.namedItem("dnsconfig").isNull()) {
+      e = config.ownerDocument().createElement("dnsconfig");
+      QDomElement e2 = config.ownerDocument().createElement("dns");
+      e2.setAttribute("dnsip", "");
+      config.appendChild(e);
+      e.appendChild(e2);
+  }
+
+  root = new QDomElement(config);
+//  root->appendChild(e);
 
   // get tcp/ip information
   hostip = config.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().value();
@@ -89,5 +124,51 @@ void MBasicNetworking::reset(QDomElement config) {
 
 }
 
-bool MBasicNetworking::run() {}
+bool MBasicNetworking::run() {
 
+  currentProfileChanged = true;
+  cout << "Profile changed ... " << endl;
+  hostip = widget->le_hostip->text();
+  netmask = widget->le_netmask->text();
+  gateway = widget->le_gateway->text();
+  dnsip = widget->le_dnsip->text();
+  device = widget->le_deviceName->text();
+
+
+  QString commandLine;
+  commandLine = QString("ifconfig ") + QString("eth0 ") + dnsip + QString(" netmask ") + netmask;
+  cout << commandLine << endl;
+
+  KTempFile script(QString::null, QString::null, 0700 );
+  if (script.status()) {
+      cout << "Error: Could not create temporary script file." << endl;
+      return false;
+  }
+
+  //script.setAutoDelete(true);
+  QTextStream outfile(script.file());
+  outfile <<  QString("/sbin/route del default;") << endl;
+  outfile << QString("/sbin/route add default gw ") << gateway << ">& /tmp/test.log;" << endl;
+  outfile << QString("/sbin/ifconfig ") << device << " " << hostip << " netmask " << netmask << ";" << endl;
+  script.close();
+
+  KProcess proc;
+  proc << script.name();
+
+//  connect(&proc, SIGNAL(processExited(KProcess *)), this, SLOT(processFinished(KProcess *)));
+  proc.start( KProcess::Block );
+
+  // write dns server to /etc/resolv.conf
+  QFile* resolvfile = new QFile("/etc/resolv.conf");
+  resolvfile->open(IO_WriteOnly);
+  QTextStream outStream(resolvfile);
+  outStream << "search local" << endl;
+  outStream << "nameserver " << dnsip << endl;
+  resolvfile->close();
+
+  currentProfileChanged = false;
+
+  // TODO: Insert sanity and security checks!!! ifconfig needs to be run as root.
+}
+
+#include "mbasicnetworking.moc"

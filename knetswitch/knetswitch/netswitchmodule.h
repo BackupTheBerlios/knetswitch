@@ -19,14 +19,15 @@
 
 
 #include <qdom.h>
-
+#include <qobject.h>
 /**
  *Base class for all modules providing advanced
  * KNewSwitch configuration options.
  *@author Oliver Strutynski
 */
-class NetswitchModule {
-public: 
+class NetswitchModule : public QObject {
+ Q_OBJECT
+public:
 	NetswitchModule(QWidget* parent);
 	virtual ~NetswitchModule();
 
