@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>390</width>
+            <width>374</width>
             <height>291</height>
         </rect>
     </property>
@@ -37,22 +37,6 @@
         <property stdset="1">
             <name>text</name>
             <string>New...</string>
-        </property>
-    </widget>
-    <widget>
-        <class>QComboBox</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>combo_Routes</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>90</x>
-                <y>10</y>
-                <width>221</width>
-                <height>21</height>
-            </rect>
         </property>
     </widget>
     <widget>
@@ -136,54 +120,6 @@
         </property>
     </widget>
     <widget>
-        <class>QLineEdit</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>LineEdit1_2_2</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>140</x>
-                <y>140</y>
-                <width>151</width>
-                <height>22</height>
-            </rect>
-        </property>
-    </widget>
-    <widget>
-        <class>QLineEdit</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>LineEdit1_2_3</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>140</x>
-                <y>165</y>
-                <width>151</width>
-                <height>22</height>
-            </rect>
-        </property>
-    </widget>
-    <widget>
-        <class>QLineEdit</class>
-        <property stdset="1">
-            <name>name</name>
-            <cstring>LineEdit1_2_4</cstring>
-        </property>
-        <property stdset="1">
-            <name>geometry</name>
-            <rect>
-                <x>140</x>
-                <y>190</y>
-                <width>151</width>
-                <height>22</height>
-            </rect>
-        </property>
-    </widget>
-    <widget>
         <class>QLabel</class>
         <property stdset="1">
             <name>name</name>
@@ -244,10 +180,26 @@
         </property>
     </widget>
     <widget>
+        <class>QComboBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>combo_Routes</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>90</x>
+                <y>10</y>
+                <width>221</width>
+                <height>21</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
         <class>QLineEdit</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>LineEdit1</cstring>
+            <cstring>le_from</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
@@ -263,7 +215,7 @@
         <class>QLineEdit</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>LineEdit1_2</cstring>
+            <cstring>le_to</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
@@ -279,13 +231,61 @@
         <class>QLineEdit</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>LineEdit1_2</cstring>
+            <cstring>le_via</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
             <rect>
                 <x>140</x>
                 <y>105</y>
+                <width>151</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_protocol</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>140</x>
+                <y>140</y>
+                <width>151</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_proxyprotocol</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>140</x>
+                <y>165</y>
+                <width>151</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>le_method</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>140</x>
+                <y>190</y>
                 <width>151</width>
                 <height>22</height>
             </rect>

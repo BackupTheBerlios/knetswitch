@@ -28,7 +28,7 @@ class SocksRoute {
 public: 
 	SocksRoute(QString name);
 	~SocksRoute();
-private:
+
   QString name, from, to, via, proto, proxyproto, method;
 };
 

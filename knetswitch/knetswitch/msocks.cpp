@@ -37,12 +37,14 @@ QString MSocks::getName() {
   return "Socks";
 }
 
-
 QWidget* MSocks::getWidget() {
   return widget;
 }
 
 void MSocks::init(QDomElement config) {
+  connect(widget->pb_newSocksRoute, SIGNAL(clicked()), this, SLOT(createNewRoute()));
+  connect(widget->combo_Routes, SIGNAL(activated(const QString&)), this, SLOT(routeActivated(const QString&)));
+
   reset(config);
 }
 
@@ -58,9 +60,52 @@ void MSocks::createNewRoute() {
 }
 
 QDomElement MSocks::save() {
+  // just write the content of our widgets to dom tree
 
-return *root;
+  currentProfileChanged = true;
+  cout << "Profile changed ... " << endl;
 
+  if (currentProfileChanged) {
+      cout << "setting dom elements" << endl;
+      // remove old child nodes. all nodes will be regenerated
+      // using the save methods of the modules.
+      QDomNode n = root->namedItem("routes").firstChild();
+      QDomNode result;
+      while ( !n.isNull() ) {
+          result = root->removeChild(n);
+          cout << "removing child" << endl;
+          if (!result.isNull()) { n = result; } else { cout << "Error: Element could not be deleted." << endl; }
+          n = n.nextSibling();
+      }
+
+      // iterate over routes and create appropriate xml elements
+      QDomElement e;
+
+
+      QDictIterator<SocksRoute> it(routes);
+      while(it.current()) {
+         SocksRoute *route = it.current();
+         e = root->ownerDocument().createElement("SocksRoute");
+         e.setAttribute("name", it.currentKey());
+         e.setAttribute("from", route->from);
+         e.setAttribute("to", route->to);
+         e.setAttribute("via", route->via);
+         e.setAttribute("protocol", route->proto);
+         e.setAttribute("proxyprotocol", route->proxyproto);
+         e.setAttribute("method", route->method);
+         root->namedItem("routes").appendChild(e);
+         ++it;
+      }
+  }
+  return *root;
+
+}
+
+void MSocks::routeActivated(const QString& route) {
+  cout << "Current route: " << route << endl;
+  routes[currentRoute]->from = widget->le_from->text();
+
+  currentRoute = route;
 }
 
 void MSocks::reset(QDomElement config) {
@@ -74,17 +119,15 @@ void MSocks::reset(QDomElement config) {
 
   root = new QDomElement(config);
 
-  // get tcp/ip information
-/*  hostip = config.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().value();
-  netmask = config.namedItem("ipconfig").attributes().namedItem("netmask").toAttr().value();
-  gateway = config.namedItem("ipconfig").attributes().namedItem("gateway").toAttr().value();
-  dnsip = config.namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().value();*/
-  // get device name
-//  device = config.namedItem("device").attributes().namedItem("devicename").toAttr().value();
-
-
-
-
+  // if any of the following nodes/attributes does not exist, create them so
+  // that we have a complete dom tree when we save the current items
+  // later on. nodes for individual routes will be added as required when saving.
+  QDomElement e;
+  if (config.namedItem("routes").isNull()) {
+      cout << "Creating \"routes\" element..." << endl;
+      e = config.ownerDocument().createElement("routes");
+      config.appendChild(e);
+  } else { cout << "routes exists" << endl; }
 }
 
 bool MSocks::run() {}

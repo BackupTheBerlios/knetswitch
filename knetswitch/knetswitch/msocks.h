@@ -27,7 +27,8 @@
   */
 
 class MSocks : public NetswitchModule  {
-public: 
+ Q_OBJECT
+public:
 	MSocks(QWidget* widget);
 	virtual ~MSocks();
 
@@ -61,14 +62,15 @@ public:
   virtual bool MSocks::run();
 
 public slots:
-
   void createNewRoute();
+  void routeActivated(const QString&);
 
 private:
   widget_dantesocks* widget;
   QDomElement* root;
   QDict<SocksRoute> routes;
   bool currentProfileChanged;
+  QString currentRoute;
 };
 
 #endif
