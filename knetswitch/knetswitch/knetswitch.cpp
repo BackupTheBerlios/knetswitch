@@ -36,13 +36,19 @@
 #include "modulelistboxitem.h"
 
 #include <klineeditdlg.h>
+#include <kstddirs.h>
 
 KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
 {
-  rcfile = "/home/olistrut/.knetswitchrc";
+  rcfile = locateLocal("appdata", "knetswitchrc");
+  cout << rcfile << endl;
+
   // place widgets here
   this->setMinimumHeight(400);
   profileWidget = new ProfileWidget(this);
+
+  profileWidget->combo_profileNames2->insertItem(rcfile);
+
 
   NetswitchModule* m = new MSocks(profileWidget->GroupBox2);
   cout << "Adding Module " << m->getIdentifier() << endl;
