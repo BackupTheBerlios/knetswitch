@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment=KNetSwitch - Dynamic switching of network profiles
+DocPath=
+Exec=kdesu kcmshell knetswitch
+Icon=
+Keywords=KNetSwitch,knetswitch
+Name=The KNetSwitch applet
+SwallowExec=
+SwallowTitle=
+Terminal=false
+TerminalOptions=
+Type=Application
+X-KDE-FactoryName=knetswitch
+X-KDE-Library=knetswitch
+X-KDE-ModuleType=Library
+X-KDE-RootOnly=true
+X-KDE-HasReadOnlyMode=false

@@ -1,0 +1,4 @@
+#MIN_CONFIG
+
+AM_INIT_AUTOMAKE(knetswitch,0.1)
+

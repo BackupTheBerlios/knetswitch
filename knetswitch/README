@@ -1,0 +1,17 @@
+KNetSwitch 0.1
+==============
+
+0.1) Purpose of the Program
+0.2) Prerequisites
+
+
+0.2 Prerequisites
+=================
+The following utilities must be present in /sbin:
+ - ifconfig
+ - route
+
+Any distribution complying to the Filesystem Hierarchy Standard (FHS)
+version 2.2 should have these utilities in the above location.
+
+

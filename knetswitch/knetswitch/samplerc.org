@@ -1,0 +1,18 @@
+<knetswitchprofiles>
+    <knetswitchprofile name="glh">
+        <device devicename="eth0"/>
+        <ipconfig hostip="10.151.4.24" netmask="255.255.255.0" gateway="10.151.4.254"/>
+        <dnsconfig>
+           <dns dnsip="10.151.4.1"/>
+           <nodns nodnsname="olistrut024"/>
+        </dnsconfig>
+    </knetswitchprofile>
+    <knetswitchprofile name="test">
+        <device devicename="eth0"/>
+        <ipconfig hostip="192.168.0.1" netmask="255.255.255.1" gateway="192.168.0.254"/>
+        <dnsconfig>
+           <dns dnsip="192.168.0.1"/>
+           <nodns nodnsname="localhost"/>
+        </dnsconfig>
+    </knetswitchprofile>
+</knetswitchprofiles>

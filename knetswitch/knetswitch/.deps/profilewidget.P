@@ -1,0 +1,82 @@
+profilewidget.lo profilewidget.o : profilewidget.cpp profilewidget.h profiletab.h \
+ /usr/local/qt/include/qvariant.h /usr/local/qt/include/qstring.h \
+ /usr/local/qt/include/qcstring.h /usr/local/qt/include/qarray.h \
+ /usr/local/qt/include/qgarray.h /usr/local/qt/include/qshared.h \
+ /usr/local/qt/include/qglobal.h /usr/local/qt/include/qfeatures.h \
+ /usr/local/qt/include/qconfig.h /usr/include/string.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/gnu/stubs.h \
+ /usr/lib/gcc-lib/i486-suse-linux/2.95.2/include/stddef.h \
+ /usr/local/qt/include/qvaluelist.h \
+ /usr/local/qt/include/qdatastream.h /usr/local/qt/include/qiodevice.h \
+ /usr/local/qt/include/qstringlist.h /usr/local/qt/include/qregexp.h \
+ /usr/local/qt/include/qmap.h /usr/local/qt/include/qwidget.h \
+ /usr/local/qt/include/qwindowdefs.h \
+ /usr/local/qt/include/qobjectdefs.h \
+ /usr/local/qt/include/qnamespace.h \
+ /usr/lib/gcc-lib/i486-suse-linux/2.95.2/include/limits.h \
+ /usr/lib/gcc-lib/i486-suse-linux/2.95.2/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/local/qt/include/qobject.h \
+ /usr/local/qt/include/qevent.h /usr/local/qt/include/qregion.h \
+ /usr/local/qt/include/qrect.h /usr/local/qt/include/qsize.h \
+ /usr/local/qt/include/qpoint.h /usr/local/qt/include/qmime.h \
+ /usr/local/qt/include/qpaintdevice.h /usr/local/qt/include/qpalette.h \
+ /usr/local/qt/include/qcolor.h /usr/local/qt/include/qbrush.h \
+ /usr/local/qt/include/qcursor.h /usr/local/qt/include/qfont.h \
+ /usr/local/qt/include/qfontmetrics.h \
+ /usr/local/qt/include/qfontinfo.h /usr/local/qt/include/qstyle.h \
+ /usr/local/qt/include/qsizepolicy.h /usr/local/qt/include/qcombobox.h
+profilewidget.cpp :
+profilewidget.h :
+profiletab.h :
+/usr/local/qt/include/qvariant.h :
+/usr/local/qt/include/qstring.h :
+/usr/local/qt/include/qcstring.h :
+/usr/local/qt/include/qarray.h :
+/usr/local/qt/include/qgarray.h :
+/usr/local/qt/include/qshared.h :
+/usr/local/qt/include/qglobal.h :
+/usr/local/qt/include/qfeatures.h :
+/usr/local/qt/include/qconfig.h :
+/usr/include/string.h :
+/usr/include/features.h :
+/usr/include/sys/cdefs.h :
+/usr/include/gnu/stubs.h :
+/usr/lib/gcc-lib/i486-suse-linux/2.95.2/include/stddef.h :
+/usr/local/qt/include/qvaluelist.h :
+/usr/local/qt/include/qdatastream.h :
+/usr/local/qt/include/qiodevice.h :
+/usr/local/qt/include/qstringlist.h :
+/usr/local/qt/include/qregexp.h :
+/usr/local/qt/include/qmap.h :
+/usr/local/qt/include/qwidget.h :
+/usr/local/qt/include/qwindowdefs.h :
+/usr/local/qt/include/qobjectdefs.h :
+/usr/local/qt/include/qnamespace.h :
+/usr/lib/gcc-lib/i486-suse-linux/2.95.2/include/limits.h :
+/usr/lib/gcc-lib/i486-suse-linux/2.95.2/include/syslimits.h :
+/usr/include/limits.h :
+/usr/include/bits/posix1_lim.h :
+/usr/include/bits/local_lim.h :
+/usr/include/linux/limits.h :
+/usr/include/bits/posix2_lim.h :
+/usr/local/qt/include/qobject.h :
+/usr/local/qt/include/qevent.h :
+/usr/local/qt/include/qregion.h :
+/usr/local/qt/include/qrect.h :
+/usr/local/qt/include/qsize.h :
+/usr/local/qt/include/qpoint.h :
+/usr/local/qt/include/qmime.h :
+/usr/local/qt/include/qpaintdevice.h :
+/usr/local/qt/include/qpalette.h :
+/usr/local/qt/include/qcolor.h :
+/usr/local/qt/include/qbrush.h :
+/usr/local/qt/include/qcursor.h :
+/usr/local/qt/include/qfont.h :
+/usr/local/qt/include/qfontmetrics.h :
+/usr/local/qt/include/qfontinfo.h :
+/usr/local/qt/include/qstyle.h :
+/usr/local/qt/include/qsizepolicy.h :
+/usr/local/qt/include/qcombobox.h :
