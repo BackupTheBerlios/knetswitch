@@ -1,4 +1,5 @@
-# Generated automatically from Makefile.in by configure.
+# Generated automatically from Makefile.in by config.pl.
+# KDE tags expanded automatically by am_edit - $Revision: 1.3 $ 
 # Makefile.in generated automatically by automake 1.4 from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
@@ -18,8 +19,13 @@ SHELL = /bin/sh
 
 srcdir = .
 top_srcdir = ..
+VPATH = .
 prefix = /opt/kde2
 exec_prefix = ${prefix}
+#>- 
+bindir = ${exec_prefix}/bin
+#>+ 3
+DEPDIR = .deps
 
 bindir = ${exec_prefix}/bin
 sbindir = ${exec_prefix}/sbin
@@ -47,7 +53,7 @@ AUTOCONF = autoconf
 AUTOMAKE = automake
 AUTOHEADER = autoheader
 
-INSTALL = /usr/bin/ginstall -c -p
+INSTALL = /usr/bin/install -c -p
 INSTALL_PROGRAM = ${INSTALL} $(INSTALL_STRIP_FLAG) $(AM_INSTALL_PROGRAM_FLAGS)
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_SCRIPT = ${INSTALL}
@@ -97,7 +103,7 @@ KDE_EXTRA_RPATH =
 KDE_INCLUDES = -I/opt/kde2/include
 KDE_LDFLAGS = -L/opt/kde2/lib
 KDE_PLUGIN = -avoid-version -module -no-undefined $(KDE_RPATH)
-KDE_RPATH = -R $(kde_libraries) -R $(x_libraries)
+KDE_RPATH = -R $(kde_libraries) -R $(qt_libraries) -R $(x_libraries)
 KDE_USE_CLOSURE_FALSE = #
 KDE_USE_CLOSURE_TRUE = 
 KDE_USE_FINAL_FALSE = 
@@ -114,10 +120,10 @@ LIBPNG = -lpng -lz -lm
 LIBPTHREAD = @LIBPTHREAD@
 LIBPYTHON = @LIBPYTHON@
 LIBQIMGIO = @LIBQIMGIO@
-LIBRESOLV = 
+LIBRESOLV = -lresolv
 LIBSHADOW = @LIBSHADOW@
 LIBSM = -lSM -lICE
-LIBSOCKET = 
+LIBSOCKET =  -lresolv
 LIBTIFF = @LIBTIFF@
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIBUCB = 
@@ -146,9 +152,9 @@ MCOPIDL = /opt/kde2/bin/mcopidl
 MEINPROC = /opt/kde2/bin/meinproc
 MICO_INCLUDES = @MICO_INCLUDES@
 MICO_LDFLAGS = @MICO_LDFLAGS@
-MOC = /usr/local/qt/bin/moc
+MOC = /usr/lib/qt2/bin/moc
 MSGFMT = /usr/bin/msgfmt
-NOOPT_CXXFLAGS =  -march=pentiumpro -fno-exceptions -fno-exceptions -fno-check-new
+NOOPT_CXXFLAGS =  -g3 -Wall -fno-exceptions -fno-check-new
 NOREPO = -fno-repo
 OBJDUMP = @OBJDUMP@
 OBJEXT = o
@@ -158,14 +164,14 @@ PASSWDLIBS = @PASSWDLIBS@
 PYTHONINC = @PYTHONINC@
 PYTHONLIB = @PYTHONLIB@
 PYTHONMODDIR = @PYTHONMODDIR@
-QT_INCLUDES = -I/usr/local/qt/include
-QT_LDFLAGS = 
+QT_INCLUDES = -I/usr/lib/qt2/include
+QT_LDFLAGS = -L/usr/lib/qt2/lib
 RANLIB = ranlib
 REPO = -frepo
 SETUIDFLAGS = @SETUIDFLAGS@
 STRIP = strip
 TOPSUBDIRS =  doc knetswitch po
-UIC = /usr/local/qt/bin/uic
+UIC = /usr/lib/qt2/bin/uic
 USER_INCLUDES = 
 USER_LDFLAGS = 
 USE_EXCEPTIONS = -fexceptions
@@ -175,12 +181,12 @@ VERSION = 0.1
 XGETTEXT = /usr/bin/xgettext
 XPMINC = @XPMINC@
 XPMLIB = @XPMLIB@
-X_EXTRA_LIBS = 
+X_EXTRA_LIBS =  -lresolv
 X_INCLUDES = -I/usr/X11R6/include
 X_LDFLAGS = -L/usr/X11R6/lib
 X_PRE_LIBS = 
-all_includes = -I/opt/kde2/include -I/usr/local/qt/include -I/usr/X11R6/include 
-all_libraries = -L/usr/X11R6/lib -L/opt/kde2/lib 
+all_includes = -I/opt/kde2/include -I/usr/lib/qt2/include -I/usr/X11R6/include 
+all_libraries = -L/usr/X11R6/lib -L/usr/lib/qt2/lib -L/opt/kde2/lib 
 idldir = @idldir@
 jni_includes = @jni_includes@
 kde_appsdir = ${prefix}/share/applnk
@@ -191,8 +197,8 @@ kde_htmldir = ${prefix}/share/doc/HTML
 kde_icondir = ${prefix}/share/icons
 kde_includes = /opt/kde2/include
 kde_libraries = /opt/kde2/lib
-kde_libs_htmldir = /opt/kde2/share/doc/HTML
-kde_libs_prefix = /opt/kde2
+kde_libs_htmldir = /opt/kde2//share/doc/HTML
+kde_libs_prefix = /opt/kde2/
 kde_locale = ${prefix}/share/locale
 kde_mimedir = ${prefix}/share/mimelnk
 kde_moduledir = ${exec_prefix}/lib/kde2
@@ -202,8 +208,8 @@ kde_sounddir = ${prefix}/share/sounds
 kde_templatesdir = ${prefix}/share/templates
 kde_wallpaperdir = ${prefix}/share/wallpapers
 micodir = @micodir@
-qt_includes = /usr/local/qt/include
-qt_libraries = 
+qt_includes = /usr/lib/qt2/include
+qt_libraries = /usr/lib/qt2/lib
 x_includes = /usr/X11R6/include
 x_libraries = /usr/X11R6/lib
 
@@ -218,10 +224,15 @@ DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
 GZIP_ENV = --best
-all: all-redirect
+#>- all: all-redirect
+#>+ 1
+all: docs-am  all-redirect
 .SUFFIXES:
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+#>- 	cd $(top_srcdir) && $(AUTOMAKE) --gnu doc/Makefile
+#>+ 2
 	cd $(top_srcdir) && $(AUTOMAKE) --gnu doc/Makefile
+	cd $(top_srcdir) && perl admin/am_edit doc/Makefile.in
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)
 	cd $(top_builddir) \
@@ -330,7 +341,7 @@ distdir: $(DISTFILES)
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$/$$file $(distdir)/$$file; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
@@ -389,7 +400,9 @@ mostlyclean: mostlyclean-recursive
 
 clean-am:  clean-tags clean-generic mostlyclean-am
 
-clean: clean-recursive
+#>- clean: clean-recursive
+#>+ 1
+clean: kde-rpo-clean  clean-recursive
 
 distclean-am:  distclean-tags distclean-generic clean-am
 	-rm -f libtool
@@ -422,3 +435,26 @@ maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
+
+#>+ 2
+docs-am:
+
+#>+ 5
+force-reedit:
+		cd $(top_srcdir) && $(AUTOMAKE) --gnu doc/Makefile
+	cd $(top_srcdir) && perl admin/am_edit doc/Makefile.in
+
+
+#>+ 2
+final:
+	$(MAKE) all-am
+#>+ 2
+no-final:
+	$(MAKE) all-am
+#>+ 3
+cvs-clean:
+	$(MAKE) -f $(top_srcdir)/admin/Makefile.common cvs-clean
+
+#>+ 3
+kde-rpo-clean:
+	-rm -f *.rpo

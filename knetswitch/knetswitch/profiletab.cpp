@@ -2,7 +2,7 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file './profiletab.ui'
 **
-** Created: Mon Sep 17 18:41:47 2001
+** Created: Wed Oct 3 17:23:12 2001
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -29,7 +29,7 @@ widget_profiletab::widget_profiletab( QWidget* parent,  const char* name, WFlags
 {
     if ( !name )
 	setName( "widget_profiletab" );
-    resize( 503, 448 ); 
+    resize( 495, 448 ); 
     setCaption( i18n( "Form1" ) );
 
     TabWidget2 = new QTabWidget( this, "TabWidget2" );

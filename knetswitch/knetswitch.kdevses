@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE KDevPrjSession ><KDevPrjSession>
  <Mainframe MaximizeMode="1" />
- <DocsAndViews NumberOfDocuments="9" >
+ <DocsAndViews NumberOfDocuments="14" >
   <Doc0 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/KNetSwitch/knetswitch/knetswitch.cpp" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc0>
   <Doc1 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="69" FileName="/home/olistrut/programmierung/c/KNetSwitch/knetswitch/knetswitch.h" >
    <View0 Top="0" Width="94" Attach="0" Height="1" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc1>
-  <Doc2 CursorPosLine="65" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/usr/local/qt-2.3.1/include/qtextstream.h" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  <Doc2 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/usr/local/qt-2.3.1/include/qtextstream.h" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc2>
   <Doc3 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/KNetSwitch/knetswitch/Makefile" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc3>
-  <Doc4 CursorPosLine="63" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch.cpp" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  <Doc4 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch.cpp" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc4>
-  <Doc5 CursorPosLine="29" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch.moc" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  <Doc5 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch.moc" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc5>
-  <Doc6 CursorPosLine="36" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="82" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch.h" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  <Doc6 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="82" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch.h" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc6>
   <Doc7 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/olistrut/programmierung/c/knetswitch/knetswitch/datastore.h" >
-   <View0 Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="1" Type="KWriteView" MinMaxMode="0" />
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc7>
-  <Doc8 Type="CDocBrowser" NumberOfViews="1" FileName="file:/usr/local/qt-2.2.2/doc/html/designer/chap2_3.html" >
-   <View Top="0" Width="683" Attach="0" Height="354" Left="0" Focus="0" Type="KHTMLView" MinMaxMode="0" />
+  <Doc8 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="65" FileName="/home/strutyns/src/knetswitch/knetswitch/profiletab.cpp" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
   </Doc8>
+  <Doc9 CursorPosLine="352" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/strutyns/src/knetswitch/knetswitch/knetswitch.cpp" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc9>
+  <Doc10 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/strutyns/src/knetswitch/knetswitch/profiletab.h" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KWriteView" MinMaxMode="0" />
+  </Doc10>
+  <Doc11 CursorPosLine="0" Type="KWriteDoc" NumberOfViews="1" CursorPosCol="0" FileName="/home/strutyns/src/knetswitch/knetswitch/datastore.h" >
+   <View0 Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="1" Type="KWriteView" MinMaxMode="0" />
+  </Doc11>
+  <Doc12 Type="CDocBrowser" NumberOfViews="1" FileName="file:/opt/kde2/share/doc/HTML/default/kdevelop/programming/index-14.html#ss14.4" >
+   <View Top="0" Width="683" Attach="0" Height="258" Left="0" Focus="0" Type="KHTMLView" MinMaxMode="0" />
+  </Doc12>
+  <Doc13 Type="CDocBrowser" NumberOfViews="1" FileName="file:/opt/kde2/share/doc/HTML/default/kdevelop/programming/index-6.html" >
+   <View Top="0" Width="683" Attach="0" Height="330" Left="0" Focus="0" Type="KHTMLView" MinMaxMode="0" />
+  </Doc13>
  </DocsAndViews>
 </KDevPrjSession>
