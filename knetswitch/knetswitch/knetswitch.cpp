@@ -47,10 +47,11 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
   this->setMinimumHeight(400);
   profileWidget = new ProfileWidget(this);
 
-  NetswitchModule* m = new MSocks(profileWidget->GroupBox2);
-  cout << "Adding Module " << m->getIdentifier() << endl;
-  profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch/lock.png"),m->getName(), m->getIdentifier()));
-  modules.insert(m->getIdentifier(), m);
+  NetswitchModule* m;
+  // m = new MSocks(profileWidget->GroupBox2);
+  //cout << "Adding Module " << m->getIdentifier() << endl;
+  //profileWidget->list_modules->insertItem(new ModuleListBoxItem( QPixmap("/home/olistrut/programmierung/c/knetswitch/knetswitch/knetswitch/lock.png"),m->getName(), m->getIdentifier()));
+  //modules.insert(m->getIdentifier(), m);
 
   m = new MBasicNetworking(profileWidget->GroupBox2);
   activeModule = m;
