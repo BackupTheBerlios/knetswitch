@@ -27,7 +27,7 @@ IPValidator::~IPValidator(){
 
 bool IPValidator::checkForByte(QString s) const {
   QRegExp r("^[0-9]+$");
-  cout << "checking: " << s << endl;
+  cout << "Checking: " << s << endl;
   if (r.find(s, 0) >= 0) {
       if (s.toUInt() > 255) {
           // not in the range of 0..255
@@ -48,29 +48,23 @@ QValidator::State IPValidator::validate ( QString &s, int &pos ) const {
 
   for (unsigned int i = 0; i < s.length(); i++) {
       if ((0 != r.find(QString(s[i]), 0)) && ('.' != s[i]) ) {
-          cout << "invalid character " << endl;
           s = s.left(pos - 1); pos--; return QValidator::Intermediate;
       }
 
       if ('.' == s[i]) {
           if (4 == count) { s = s.left(pos - 1); pos--; return QValidator::Intermediate; }
           cout << s.mid(last, i-last+1) << endl;
-          if (r.find(s.mid(last, i-last+1), 0) >= 0) {
-              if (s.mid(last, i-last+1).toUInt() > 255) {
-                  // not a valid ip adress
-                  s = s.left(pos - 1); pos--; return QValidator::Intermediate;
-              }
-          } else { s = s.left( pos - 1); pos--; return QValidator::Intermediate; }
+          if (!checkForByte(s.mid(last, i-last))) {
+              s = s.left(pos - 1); pos--; return QValidator::Intermediate;
+          }
           last = i+1;
           count++;
       } else if ((s.length() - 1) == i) {
-          cout << "last character" << endl;
           if (!checkForByte(s.mid(last))) {
               s = s.left( pos - 1); pos--; return QValidator::Intermediate;
           }
       } else {
           if (0 != r.find(QString(s[i]), 0)) {
-              cout << "invalid character " << endl;
               s = s.left(pos - 1); pos--; return QValidator::Intermediate;
           }
       }

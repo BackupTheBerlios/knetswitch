@@ -9,7 +9,7 @@ LDFLAGS =
 
 libkcm_knetswitch_la_METASOURCES=AUTO
 
-libkcm_knetswitch_la_SOURCES = ipvalidator.cpp profilewidget.cpp profiletab.ui knetswitch.cpp 
+libkcm_knetswitch_la_SOURCES = ipvalidator.cpp profilewidget.cpp profiletab.ui knetswitch.cpp profiletab.cpp
 libkcm_knetswitch_la_LIBADD =  -lXext -lX11 $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) 
 
 libkcm_knetswitch_la_LDFLAGS = -module $(KDE_PLUGIN)   
