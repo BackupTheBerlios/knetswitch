@@ -20,7 +20,7 @@ type=DATA
 addcxxflags=
 bin_program=knetswitch
 cxxflags=\s-O0 -g3 -Wall
-ldadd=$(X_LDFLAGS) $(KDE_LDFLAGS) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
+ldadd=\s$(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT) -lXext -lX11
 ldflags=
 
 [General]
@@ -31,8 +31,8 @@ email=olistrut@gmx.de
 kdevprj_version=1.3
 lfv_open_groups=Headers,Others,Sources,User Interface
 make_options=\s-j1
-makefiles=Makefile.am,knetswitch/Makefile.am,doc/Makefile.am,doc/en/Makefile.am,po/Makefile.am
-modifyMakefiles=true
+makefiles=Makefile.am,knetswitch/Makefile.am,doc/Makefile.am,doc/en/Makefile.am,po/Makefile.am,knetswitch/widgets/Makefile.am
+modifyMakefiles=false
 project_name=KNetSwitch
 project_type=kc_module
 sgml_file=/home/olistrut/programmierung/c/knetswitch/doc/en/index.docbook
@@ -102,8 +102,8 @@ install_location=
 type=DATA
 
 [knetswitch/Makefile.am]
-files=knetswitch/knetswitch.cpp,knetswitch/knetswitch.h,knetswitch/profiletab.ui,knetswitch/profilewidget.cpp,knetswitch/profilewidget.h,knetswitch/knetswitch.desktop,knetswitch/ipvalidator.cpp,knetswitch/ipvalidator.h,knetswitch/profiletab.h
-sub_dirs=
+files=knetswitch/knetswitch.cpp,knetswitch/knetswitch.h,knetswitch/profiletab.ui,knetswitch/profilewidget.cpp,knetswitch/profilewidget.h,knetswitch/ipvalidator.cpp,knetswitch/ipvalidator.h,knetswitch/netswitchmodule.cpp,knetswitch/netswitchmodule.h,knetswitch/msocks.cpp,knetswitch/msocks.h
+sub_dirs=widgets
 type=shared_library
 
 [knetswitch/ipvalidator.cpp]
@@ -124,19 +124,31 @@ install=false
 install_location=
 type=SOURCE
 
-[knetswitch/knetswitch.desktop]
-dist=true
-install=true
-install_location=$$(kde_appsdir)/Settings/Network/
-type=DATA
-
 [knetswitch/knetswitch.h]
 dist=true
 install=false
 install_location=
 type=HEADER
 
-[knetswitch/profiletab.h]
+[knetswitch/msocks.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[knetswitch/msocks.h]
+dist=true
+install=false
+install_location=
+type=HEADER
+
+[knetswitch/netswitchmodule.cpp]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
+[knetswitch/netswitchmodule.h]
 dist=true
 install=false
 install_location=
@@ -160,19 +172,19 @@ install=false
 install_location=
 type=HEADER
 
+[knetswitch/widgets/Makefile.am]
+files=knetswitch/widgets/dantesocks.ui
+sharedlib_LDFLAGS=-version-info 0:0:1
+sharedlib_rootname=widgets
+sub_dirs=
+type=shared_library
+
+[knetswitch/widgets/dantesocks.ui]
+dist=true
+install=false
+install_location=
+type=SOURCE
+
 [po/Makefile.am]
-files=po/de.po,po/af.po
 sub_dirs=
 type=po
-
-[po/af.po]
-dist=false
-install=false
-install_location=
-type=PO
-
-[po/de.po]
-dist=false
-install=false
-install_location=
-type=PO

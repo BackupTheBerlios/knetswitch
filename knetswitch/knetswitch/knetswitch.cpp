@@ -27,44 +27,56 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
+#include <qgroupbox.h>
+
+#include "msocks.h"
 
 #include <ktempfile.h>
 #include <klineeditdlg.h>
 
 KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
 {
-	rcfile = "/home/olistrut/programmierung/c/KNetSwitch/knetswitch/samplerc";
+  rcfile = "/home/olistrut/.knetswitchrc";
   // place widgets here
   this->setMinimumHeight(400);
   profileWidget = new ProfileWidget(this);
   IPValidator* val1 = new IPValidator(this);
-  profileWidget->le_hostip->setValidator(val1);
+/*  profileWidget->le_hostip->setValidator(val1);
   profileWidget->le_gateway->setValidator(val1);
   profileWidget->le_netmask->setValidator(val1);
   profileWidget->le_dnsip->setValidator(val1);
-  QVBoxLayout* layout = new QVBoxLayout(this);
-  layout->addWidget(profileWidget);
+*/
+/*  QVBoxLayout* layout = new QVBoxLayout(this);
+  layout->add(profileWidget);*/
+
   load();
+
   currentProfileChanged = false;
   connect(profileWidget->combo_profileNames1, SIGNAL(activated(const QString&)), this, SLOT(profileViewActivated(const QString&)));
   connect(profileWidget->combo_profileNames2, SIGNAL(activated(const QString&)), this, SLOT(profileEditActivated(const QString&)));
-  connect(profileWidget->le_hostip, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged(const QString&)));
+/*  connect(profileWidget->le_hostip, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged(const QString&)));
   connect(profileWidget->le_dnsip, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged(const QString&)));
   connect(profileWidget->le_netmask, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged(const QString&)));
   connect(profileWidget->le_gateway, SIGNAL(textChanged(const QString&)), this, SLOT(textChanged(const QString&)));
+*/
   connect(profileWidget->pb_saveCurrentProfile, SIGNAL(clicked()), this, SLOT(saveProfileClicked()));
   connect(profileWidget->pb_resetCurrentProfile, SIGNAL(clicked()), this, SLOT(resetProfileClicked()));
   connect(profileWidget->pb_newProfile, SIGNAL(clicked()), this, SLOT(newProfileClicked()));
-  cout << "init done " << endl;
+  connect(profileWidget->list_modules, SIGNAL(selectionChanged()), this, SLOT(switchModule()));
+
+/*  cout << "init done " << endl;
   if (getuid() != 0) {
       QLayoutIterator it = layout->iterator();
       QLayoutItem *child;
       while ( (child = it.current() ) ) {
-          child->widget()->setEnabled(false);
+          //child->widget()->setEnabled(false);
           ++it;
       }
   }
+*/
+//  QLayout* layout = this->layout();
 
+//  _layout->add(test->getWidget());
 }
 
 void KNetSwitch::processFinished(KProcess* dummy) {
@@ -82,6 +94,8 @@ void KNetSwitch::newProfileClicked() {
   if (!dlg.text().stripWhiteSpace().isEmpty()) {
      profileWidget->combo_profileNames2->insertItem(dlg.text(), 0);
   }
+
+
   // add nodes to dom tree
   QDomElement e = dataStore->createElement("knetswitchprofile");
   e.setAttribute("name", dlg.text());
@@ -103,6 +117,8 @@ void KNetSwitch::newProfileClicked() {
   // add nodns entries somehow
   profileWidget->combo_profileNames1->insertItem(dlg.text(), 0);
   profileEditActivated(dlg.text());
+  cout << " === Dump === " << endl;
+  cout << dataStore->toString();
 }
 
 void KNetSwitch::resetProfileClicked() {
@@ -131,11 +147,13 @@ void KNetSwitch::saveProfileClicked() {
           // set device name
           // QString deviceName = curProf.namedItem("device").attributes().namedItem("devicename").toAttr().value();
           // set tcp/ip information
-          curProf.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().setValue(profileWidget->le_hostip->text());
+          cout << "creating dom elements" << endl;
+/*          curProf.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().setValue(profileWidget->le_hostip->text());
           curProf.namedItem("ipconfig").attributes().namedItem("netmask").toAttr().setValue(profileWidget->le_netmask->text());
           curProf.namedItem("ipconfig").attributes().namedItem("gateway").toAttr().setValue(profileWidget->le_gateway->text());
           curProf.namedItem("device").attributes().namedItem("devicename").toAttr().setValue(profileWidget->le_deviceName->text());
           curProf.namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().setValue(profileWidget->le_dnsip->text());
+*/
       }
       QFile* outfile = new QFile(rcfile);
       outfile->open(IO_WriteOnly);
@@ -169,7 +187,7 @@ void KNetSwitch::profileViewActivated(const QString& profileName) {
         cout << name.toAttr().value() << " => will continue " << endl;
         continue;
       }
-      // get device name
+/*      // get device name
       QString deviceName = curProf.namedItem("device").attributes().namedItem("devicename").toAttr().value();
       // get tcp/ip information
       QString hostip = curProf.namedItem("ipconfig").attributes().namedItem("hostip").toAttr().value();
@@ -182,7 +200,7 @@ void KNetSwitch::profileViewActivated(const QString& profileName) {
       profileWidget->lbl_gateway->setText(gateway);
       profileWidget->lbl_dns->setText(dnsip);
       profileWidget->lbl_deviceName->setText(deviceName);
-
+*/
   }
 
 
@@ -225,10 +243,10 @@ void KNetSwitch::profileEditActivated(const QString& profileName) {
       QString gateway = curProf.namedItem("ipconfig").attributes().namedItem("gateway").toAttr().value();
       QString dnsip = curProf.namedItem("dnsconfig").namedItem("dns").attributes().namedItem("dnsip").toAttr().value();
 
-      profileWidget->le_hostip->setText(hostip);
+      /*profileWidget->le_hostip->setText(hostip);
       profileWidget->le_netmask->setText(netmask);
       profileWidget->le_gateway->setText(gateway);
-      profileWidget->le_dnsip->setText(dnsip);
+      profileWidget->le_dnsip->setText(dnsip);*/
 
   }
 }
@@ -241,16 +259,20 @@ KNetSwitch::~KNetSwitch() {
 
 void KNetSwitch::load() {
   // Load config from file.
-
+//switchModule();
   dataStore = new QDomDocument("configfile");
   QFile f( rcfile );
   if (!f.open(IO_ReadOnly)) {
-      cout << "Error 1" << endl;
+      cout << "Could not open config file. Using default (zero) configuration instead." << endl;
+      dataStore->appendChild(dataStore->createElement("knetswitchprofiles"));
+      root = dataStore->documentElement();
       return;
   }
   if (!dataStore->setContent(&f)) {
-      cout << "Error 2" << endl;
+      cout << "Error reading input file. Using default (zero) configuration instead." << endl;
       f.close();
+      dataStore->appendChild(dataStore->createElement("knetswitchprofiles"));
+      root = dataStore->documentElement();
       return;
   }
   f.close();
@@ -270,10 +292,26 @@ void KNetSwitch::load() {
       // the knetswitchprofile tag
       profileWidget->combo_profileNames1->insertItem(map.namedItem("name").toAttr().value());
       profileWidget->combo_profileNames2->insertItem(map.namedItem("name").toAttr().value());
+
+      if (i == 0) { profileViewActivated(map.namedItem("name").toAttr().value()); }
+
+  }
+}
+
+
+void KNetSwitch::switchModule() {
+  cout << "adding new widget" << cout << profileWidget->list_modules->currentText() << endl;
+
+  if ("socks" == profileWidget->list_modules->currentText()) {
+
+    MSocks* test = new MSocks(profileWidget->GroupBox2);
+    test->getWidget()->show();
+  } else {
+    Widget_BasicNetworking* test = new Widget_BasicNetworking(profileWidget->GroupBox2);
+    test->show();
   }
 
-
-
+//  _layout->add(test->getWidget());
 }
 
 void KNetSwitch::defaults() {
@@ -286,7 +324,6 @@ void KNetSwitch::save() {
   // "edit profiles" tab.
   // selecting apply or ok will only change the network configuration
 
-  // get route privileges
   QString commandLine;
   commandLine = QString("ifconfig ") + QString("eth0 ") + profileWidget->lbl_ip->text() + QString(" netmask ") + profileWidget->lbl_netmask->text();
   cout << commandLine << endl;
@@ -300,6 +337,7 @@ void KNetSwitch::save() {
   script.setAutoDelete(true);
   QTextStream outfile(script.file());
   outfile <<  QString("/sbin/route del default;") << endl;
+  //outfile << QString("/sbin/route add default gw ") << profileWidget->lbl_gateway->text() << ">> /tmp/test.log;" << endl;
   outfile << QString("/sbin/route add default gw ") << profileWidget->lbl_gateway->text() << ">> /tmp/test.log;" << endl;
   outfile << QString("/sbin/ifconfig ") << profileWidget->lbl_deviceName->text() << " " << profileWidget->lbl_ip->text() << " netmask " << profileWidget->lbl_netmask->text() << ";" << endl;
   script.close();

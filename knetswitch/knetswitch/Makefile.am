@@ -9,7 +9,7 @@ LDFLAGS =
 
 libkcm_knetswitch_la_METASOURCES=AUTO
 
-libkcm_knetswitch_la_SOURCES = ipvalidator.cpp profilewidget.cpp profiletab.ui knetswitch.cpp 
+libkcm_knetswitch_la_SOURCES = basicnetworking.ui netswitchmodule.cpp msocks.cpp ipvalidator.cpp profilewidget.cpp profiletab.ui dantesocks.ui knetswitch.cpp 
 libkcm_knetswitch_la_LIBADD = $(X_LDFLAGS) $(KDE_LDFLAGS) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)
 
 libkcm_knetswitch_la_LDFLAGS = -module $(KDE_PLUGIN)  

@@ -21,6 +21,9 @@
 #include <kaboutdata.h>
 #include <profilewidget.h>
 #include <ipvalidator.h>
+#include <qlayout.h>
+#include <msocks.h>
+#include <basicnetworking.h>
 
 // qt xml includes
 #include <qdom.h>
@@ -51,6 +54,7 @@ class KNetSwitch: public KCModule
       void newProfileClicked();
       void textChanged(const QString& text);
       void processFinished(KProcess *);
+      void switchModule();
    private:
       KAboutData *myAboutData;
       ProfileWidget* profileWidget;
@@ -59,6 +63,8 @@ class KNetSwitch: public KCModule
       bool currentProfileChanged;
       QString curProfileName;
       QString rcfile;
+      QVBoxLayout*  _layout;
+      MSocks* test;
 };
 
 #endif
