@@ -25,14 +25,14 @@ ldflags=\s
 [General]
 AMChanged=false
 author=Oliver Strutynski
-configure_args=--with-qt-dir=/usr/local/qt --prefix=/opt/kde2
+configure_args=\s--prefix=/opt/kde2
 email=olistrut@gmx.de
 kdevprj_version=1.3
 lfv_open_groups=Headers,Others,Sources,User Interface
 makefiles=Makefile.am,knetswitch/Makefile.am,doc/Makefile.am,doc/en/Makefile.am,po/Makefile.am
 project_name=KNetSwitch
 project_type=kc_module
-sgml_file=/home/olistrut/programmierung/c/KNetSwitch/doc/en/index.docbook
+sgml_file=/home/olistrut/programmierung/c/knetswitch/doc/en/index.docbook
 sub_dir=knetswitch/
 version=0.1
 version_control=None

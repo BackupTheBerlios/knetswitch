@@ -1,5 +1,4 @@
-# Generated automatically from Makefile.in by config.pl.
-# KDE tags expanded automatically by am_edit - $Revision: 1.1 $ 
+# Generated automatically from Makefile.in by configure.
 # Makefile.in generated automatically by automake 1.4 from Makefile.am
 
 # Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
@@ -19,13 +18,8 @@ SHELL = /bin/sh
 
 srcdir = .
 top_srcdir = .
-VPATH = .
 prefix = /opt/kde2
 exec_prefix = ${prefix}
-#>- 
-bindir = ${exec_prefix}/bin
-#>+ 3
-DEPDIR = .deps
 
 bindir = ${exec_prefix}/bin
 sbindir = ${exec_prefix}/sbin
@@ -154,7 +148,7 @@ MICO_INCLUDES = @MICO_INCLUDES@
 MICO_LDFLAGS = @MICO_LDFLAGS@
 MOC = /usr/local/qt/bin/moc
 MSGFMT = /usr/bin/msgfmt
-NOOPT_CXXFLAGS =  -g3 -Wall -fno-exceptions -fno-check-new
+NOOPT_CXXFLAGS =  -march=pentiumpro -fno-exceptions -fno-exceptions -fno-check-new
 NOREPO = -fno-repo
 OBJDUMP = @OBJDUMP@
 OBJEXT = o
@@ -232,24 +226,14 @@ Makefile.am Makefile.in TODO acinclude.m4 aclocal.m4 config.h.in \
 configure configure.in
 
 
-#>- DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
-#>+ 4
-KDE_DIST=Makefile.dist knetswitch.kdevprj configure.in.in knetswitch.lsm 
-
-DISTFILES= $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST) $(KDE_DIST)
-
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
 
 TAR = tar
 GZIP_ENV = --best
-#>- all: all-redirect
-#>+ 1
-all: docs-am  all-redirect
+all: all-redirect
 .SUFFIXES:
 $(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
-#>- 	cd $(top_srcdir) && $(AUTOMAKE) --foreign ./Makefile
-#>+ 2
 	cd $(top_srcdir) && $(AUTOMAKE) --foreign ./Makefile
-	cd $(top_srcdir) && perl admin/am_edit Makefile.in
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)
 	cd $(top_builddir) \
@@ -423,21 +407,10 @@ distdir: $(DISTFILES)
 	distdir=`cd $(distdir) && pwd`; \
 	cd $(top_srcdir) \
 	  && $(AUTOMAKE) --include-deps --build-dir=$$here --srcdir-name=$(top_srcdir) --output-dir=$$top_distdir --foreign ./Makefile
-#>- 	@for file in $(DISTFILES); do \
-#>- 	  d=$(srcdir); \
-#>- 	  if test -d $$d/$$file; then \
-#>- 	    cp -pr $$/$$file $(distdir)/$$file; \
-#>- 	  else \
-#>- 	    test -f $(distdir)/$$file \
-#>- 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
-#>- 	    || cp -p $$d/$$file $(distdir)/$$file || :; \
-#>- 	  fi; \
-#>- 	done
-#>+ 10
 	@for file in $(DISTFILES); do \
 	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pr $$d/$$file $(distdir)/$$file; \
+	    cp -pr $$/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
 	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
@@ -501,9 +474,7 @@ mostlyclean: mostlyclean-recursive
 
 clean-am:  clean-hdr clean-tags clean-generic mostlyclean-am
 
-#>- clean: clean-recursive
-#>+ 1
-clean: kde-rpo-clean  clean-recursive
+clean: clean-recursive
 
 distclean-am:  distclean-hdr distclean-tags distclean-generic clean-am
 	-rm -f libtool
@@ -553,26 +524,3 @@ dist-hook:
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
-
-#>+ 2
-docs-am:
-
-#>+ 5
-force-reedit:
-		cd $(top_srcdir) && $(AUTOMAKE) --foreign ./Makefile
-	cd $(top_srcdir) && perl admin/am_edit Makefile.in
-
-
-#>+ 2
-final:
-	$(MAKE) all-am
-#>+ 2
-no-final:
-	$(MAKE) all-am
-#>+ 3
-cvs-clean:
-	$(MAKE) -f $(top_srcdir)/admin/Makefile.common cvs-clean
-
-#>+ 3
-kde-rpo-clean:
-	-rm -f *.rpo

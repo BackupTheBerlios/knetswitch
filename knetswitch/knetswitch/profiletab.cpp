@@ -2,7 +2,7 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file './profiletab.ui'
 **
-** Created: Sun Sep 16 20:06:03 2001
+** Created: Mon Sep 17 15:49:25 2001
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!

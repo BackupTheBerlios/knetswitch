@@ -1,8 +1,8 @@
 /****************************************************************************
 ** widget_profiletab meta object code from reading C++ file 'profiletab.h'
 **
-** Created: Sun Sep 16 20:06:02 2001
-**      by: The Qt MOC ($Id: profiletab.moc,v 1.1 2001/09/16 17:02:52 olistrut Exp $)
+** Created: Mon Sep 17 15:49:25 2001
+**      by: The Qt MOC ($Id: profiletab.moc,v 1.2 2001/09/17 12:47:51 olistrut Exp $)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
