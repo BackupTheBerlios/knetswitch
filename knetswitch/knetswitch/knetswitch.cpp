@@ -56,9 +56,14 @@ KNetSwitch::KNetSwitch(QWidget *parent, const char *name):KCModule(parent,name)
   connect(profileWidget->pb_resetCurrentProfile, SIGNAL(clicked()), this, SLOT(resetProfileClicked()));
   connect(profileWidget->pb_newProfile, SIGNAL(clicked()), this, SLOT(newProfileClicked()));
   cout << "init done " << endl;
-//  if (getuid() != 0) {
-//        m_pColor2But->setEnabled(false);
-//    }
+  if (getuid() != 0) {
+      QLayoutIterator it = layout->iterator();
+      QLayoutItem *child;
+      while ( (child = it.current() ) ) {
+          child->widget()->setEnabled(false);
+          ++it;
+      }
+  }
 
 }
 
