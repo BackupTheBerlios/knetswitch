@@ -61,7 +61,8 @@ public:
 
 private:
   Widget_BasicNetworking* widget;
-
+  QString hostip, netmask, gateway, dnsip, device;
+  QDomElement* root;
 };
 
 #endif

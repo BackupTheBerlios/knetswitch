@@ -55,7 +55,7 @@ class KNetSwitch: public KCModule
       void newProfileClicked();
       void textChanged(const QString& text);
       void processFinished(KProcess *);
-      void switchModule(QListBoxItem *);
+      void switchModule();
    private:
       KAboutData *myAboutData;
       ProfileWidget* profileWidget;

@@ -24,7 +24,7 @@ MSocks::~MSocks() {
 }
 
 QString MSocks::getIdentifier() {
-  return "KNetSwitchModule::MSocks::0.1";
+  return "KNetSwitchModule::MSocks";
 }
 
 QString MSocks::getName() {
@@ -37,7 +37,10 @@ QWidget* MSocks::getWidget() {
 }
 
 void MSocks::init(QDomElement config) {}
-QDomElement MSocks::save() {}
+
+QDomElement MSocks::save() { QDomElement x; return x; }
+
 void MSocks::reset(QDomElement config) {}
+
 bool MSocks::run() {}
 
